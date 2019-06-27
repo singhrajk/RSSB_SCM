@@ -1,0 +1,24 @@
+- Download Git: https://git-scm.com/download/win {This software is for Code Merge and Control}
+- Install Git from downloaded file
+- Go to Windows Powershell
+- Go to your working directory, enter following command:
+git clone https://github.com/singhrajk/RSSB_SCM.git 
+
+- You will find a new folder RSSB_SCM in your working directory
+- Download VNC Viewer https://www.realvnc.com/en/connect/download/viewer/ {This software is to view the automation tests}
+- Install VNC Viewer from the downloaded file
+- Go to https://hub.docker.com/ and sign in using credentials: 
+- If Windows 10 or upper: Install Docker from https://docs.docker.com/docker-for-windows/install/ {This software contains images for different softwares. e.g}
+Use https://github.com/docker/toolbox/releases If versions below than Windows 10 (Install DockerToolbox-18.09.3.exe)
+
+
+docker run -d -p 4444:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-chrome-debug
+
+Open 127.0.0.1:5900 on VNC Viewer for viewing the automation tests
+
+docker build -t rssb_scm . --build-arg SITE_LOGIN_USER=&lt;username&gt; --build-arg SITE_LOGIN_PWD=&lt;password&gt; --build-arg CMD_EXECUTOR=http://127.0.0.1:4444/wd/hub
+
+docker run -it --net="host" --env SCM_HOME=/opt/ -v /Users/&lt;username&gt;/Home/Work/RSSB/RSSB_SCM/:/opt/ -w /opt/src/main/python rssb_scm python browser.py
+
+docker run -it --net="host" --env SCM_HOME=/opt/ -v /Users/&lt;username&gt;/Home/Work/RSSB/RSSB_SCM/:/opt/ -w /opt/src/unittest/python rssb_scm python -m unittest fiddle_tests
+
