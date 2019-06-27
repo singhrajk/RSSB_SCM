@@ -10,6 +10,8 @@ git clone https://github.com/singhrajk/RSSB_SCM.git
 - Go to https://hub.docker.com/ and sign in using credentials: 
 - If Windows 10 or upper: Install Docker from https://docs.docker.com/docker-for-windows/install/ {This software contains images for different softwares. e.g}
 Use https://github.com/docker/toolbox/releases If versions below than Windows 10 (Install DockerToolbox-18.09.3.exe)
+- After Installing Docker, Start Docker (Windows10 and Above) / Docker QuickStart (Windows 10 or lower) 
+-Restart Windows Powershell
 
 
 docker run -d -p 4444:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-chrome-debug
