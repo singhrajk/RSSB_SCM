@@ -1,0 +1,27 @@
+1) Install Docker
+2) Go to command prompt
+3) Copy below command
+docker pull selenium/standalone-chrome-debug:latest
+4) copy the src folder to /opt/src in a particular drive
+COPY src/ /opt/src/
+
+5) copy the below file: 
+COPY build.py /opt/
+
+sudo apt-get update && sudo apt-get install -y python-pip
+
+RUN pip install selenium
+
+WORKDIR /opt/
+
+ARG SITE_LOGIN_USER
+
+ENV SITE_LOGIN_USER=$SITE_LOGIN_USER
+
+ARG SITE_LOGIN_PWD
+
+ENV SITE_LOGIN_PWD=$SITE_LOGIN_PWD
+
+ARG CMD_EXECUTOR
+
+ENV CMD_EXECUTOR=$CMD_EXECUTOR
