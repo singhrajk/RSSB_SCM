@@ -21,4 +21,17 @@ WAIT_FOR_PRESENCE = 1
 WAIT_FOR_CLICKABLE = 2
 WAIT_FOR_PRESENCE_AND_CLICKABLE = 3
 
+## Browser or Site Specific Constants
+EXECUTOR = "CMD_EXECUTOR"
+USERNAME = "SITE_LOGIN_USER"
+PASSWORD = "SITE_LOGIN_PWD"
 
+## Console Constants
+NEW_LINE = "\n"
+STARS_LINE = "************************************************"
+STARS_START_LINE = NEW_LINE + STARS_LINE
+STARS_END_LINE = STARS_LINE + NEW_LINE
+TEST_START = "Started Testing : "
+TEST_FINSIH = "Finished Testing : "
+TEST_PASS = "RESULT: PASSED"
+TEST_FAIL = "RESULT: FAILED"

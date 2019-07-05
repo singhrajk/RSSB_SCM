@@ -13,17 +13,19 @@ class FiddleTest(unittest.TestCase):
     def setUpClass(self):
         """Start web browser"""
         delay = 60
-        command_executor = os.getenv("CMD_EXECUTOR","")
+        command_executor = os.getenv(constants.EXECUTOR,"")
         self._browser = Browser(command_executor, delay)
         try:
-            username = os.getenv("SITE_LOGIN_USER","")
-            password = os.getenv("SITE_LOGIN_PWD","")
+            username = os.getenv(constants.USERNAME,"")
+            password = os.getenv(constants.PASSWORD,"")
             self._browser.login_on_page(constants.DERA_SCM_URL, username, password)
         except Exception as ex:
             self.fail(ex)
 
     def setUp(self):
         time.sleep(2)
+        print (constants.STARS_START_LINE)
+        print (constants.TEST_START  + self._testMethodName)
 
     # Do Nothing
     def test_0(self):
@@ -36,7 +38,7 @@ class FiddleTest(unittest.TestCase):
         except Exception as ex:
             self.fail(ex)
 
-    def test_2_search_centre_scehdule(self):
+    def test_2_search_centre_details(self):
         try:
             self._browser.test_search_query(constants.TAB_CENTRE, constants.GROUP_NO_CENTRE, constants.LIST_NO_CENTRE, "1", "bangalore")
         except Exception as ex:
@@ -61,7 +63,15 @@ class FiddleTest(unittest.TestCase):
             self._browser.test_export(constants.TAB_PREACHER , constants.GROUP_NO_PREACHER , constants.LIST_NO_PREACHER, "1")
         except Exception as ex:
             self.fail(ex)
-
+    
+    def tearDown(self):
+        print (constants.TEST_FINSIH  + self._testMethodName)
+        if sys.exc_info() == (None, None, None):
+            print (constants.TEST_PASS)
+        else:
+            print (constants.TEST_FAIL)
+        print (constants.STARS_END_LINE)
+        
     @classmethod
     def tearDownClass(self):
         """Logout browser"""

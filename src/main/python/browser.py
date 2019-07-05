@@ -89,7 +89,7 @@ class Browser():
         self.click_element_at_xpath('//*[@id="wdf-list-view row-fluid"]/div/div[1]/div/button', "Error while exporting : " + tab + " tab")
 
     def search_input(self, tab, search_input):
-        self.send_inputs_at_xpath('//*[@id="'+tab+'_Id_lookup"]',search_input, "Error while entering data to search " + tab + " tab")
+        self.send_inputs_at_xpath('//*[@id="'+ tab +'_Id_lookup"]',search_input, "Error while entering data to search " + tab + " tab")
 
     def click_select_button (self, tab):
         self.click_element_at_xpath('//*[@id="divOptions"]/button',"Error while clicking select button: " + tab + " tab")
@@ -99,6 +99,7 @@ class Browser():
 
     # This method is to login on page, username , password will come from environment
     def login_on_page(self, url, username, password):
+        print("\n\tPerforming login on the browser")
         self.load_page_in_browser(url, "Error Loading the page")
         self.send_inputs_at_xpath('//*[@id="LoginId"]', username, "User Id Error")
         self.send_inputs_at_xpath('//*[@id="Password"]', password, "Password Error" )
@@ -106,22 +107,29 @@ class Browser():
 
     # Method to test the export
     def test_export(self, tab, group_no, list_no, choice_no):
+        print("\tPerforming export of the records for tab: " + tab)
         self.select_group_and_group_choice(tab, group_no, list_no, choice_no)
         self.query_records(tab)
         self.fetch_records(tab)
         self.export_records_in_excel(tab)
-
+    
+    # Method to search something in a left hand tab
     def test_search(self, tab, group_no, list_no, choice_no, search_input):
+        print("\tPerforming the search with input: " + search_input + " on the search/select menu for tab: " + tab)
         self.select_group_and_group_choice(tab, group_no, list_no, choice_no)
         self.search_input(tab, search_input)
         time.sleep(1)
         self.click_select_button(tab)
         self.click_search_button(tab)
-
+    
+    # Method to logout from the browser
     def logout(self):
+        print("\tPerforming Logout")
         self.click_element_at_xpath('//*[@id="wdf_root_div_id"]/div[1]/div/div[2]/div/div[2]/a[2]',"Logout Error")
 
+    # Method to 
     def test_search_query(self, tab, group_no, list_no, choice_no, search_input):
+        print("\tPerforming the search with input: " + search_input + " on the query/search/select menu for tab: " + tab)
         self.select_group_and_group_choice(tab, group_no, list_no, choice_no)
         self.query_records(tab)
         self.search_input(tab, search_input)
