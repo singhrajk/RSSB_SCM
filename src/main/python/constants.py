@@ -28,6 +28,8 @@ PASSWORD = "SITE_LOGIN_PWD"
 
 ## Console Constants
 NEW_LINE = "\n"
+UNDERSCORE = "_"
+SPACE = " "
 STARS_LINE = "************************************************"
 STARS_START_LINE = NEW_LINE + STARS_LINE
 STARS_END_LINE = STARS_LINE + NEW_LINE
