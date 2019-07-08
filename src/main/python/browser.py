@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.common.keys import Keys
 import time
 import constants
 
@@ -19,8 +20,8 @@ class Browser():
             )
         except WebDriverException as e:
             s = "%s" % e
-            print("Got exception %s" % s)
-            print("%s" % dir(s))
+            self.log("Got exception %s" % s)
+            self.log("%s" % dir(s))
             if "Empty pool of VM for setup Capabilities" not in s:
                 raise
         self._delay = delay
@@ -33,7 +34,7 @@ class Browser():
         try:
             self._browser.get(url)
         except:
-            print (errorMsg)
+            self.log(errorMsg)
 
     # Get Element From XPath after when the element is present
     def get_element_from_xpath(self, xpath, wait):
@@ -51,10 +52,11 @@ class Browser():
     # Sends Input keys at a particular input on x path after it is present
     def send_inputs_at_xpath(self, xpath, keys, errorMsg):
         try:
-            element = self.get_element_from_xpath(xpath, constants.WAIT_FOR_PRESENCE)
+            element = self.get_element_from_xpath(xpath, constants.WAIT_FOR_PRESENCE_AND_CLICKABLE)
+            element.clear()
             element.send_keys(keys)
         except:
-            print (errorMsg)
+            self.log(errorMsg)
 
     # Click the element available at the X Path after it is Present & Clickable
     def click_element_at_xpath(self, xpath, errorMsg):
@@ -62,68 +64,93 @@ class Browser():
             element = self.get_element_from_xpath(xpath, constants.WAIT_FOR_PRESENCE_AND_CLICKABLE)
             element.click()
         except:
-            print (errorMsg)
+            self.log(errorMsg)
 
     # Select group on the screen
     def select_group(self, group_no, tab):
-        self.click_element_at_xpath('//*[@id="mnugrp_' + group_no + '"]', "Error while clicking: " + tab + " tab")
-
+        self.click_element_at_xpath(constants.XPATH_MENU_GROUP.replace(constants.DUMMY_GROUP_NO, group_no), constants.ERROR_CLICK.replace(constants.DUMMY_TAB,tab))
+    
+    # Method to save the records by pressing SaveButton
+    def press_button(self, btn, tab):
+       self.click_element_at_xpath(constants.XPATH_BUTTON.replace(constants.DUMMY_BUTTON, btn),"Error while " + btn + " records for: " + tab + " tab")
+    
+    def send_keys_lookup(self, lookup_field, keys):
+        self.send_inputs_at_xpath(constants.XPATH_LOOKUP_FIELD.replace(constants.DUMMY_LOOKUP, lookup_field), keys, "Error while sending keys: " + keys + " in field: " + lookup_field)
+    
+    def send_keys_id(self, id_field, keys):
+        self.send_inputs_at_xpath(constants.XPATH_ID_FIELD.replace(constants.DUMMY_ID, id_field), keys, "Error while sending keys: " + keys + " in field: " + id_field)
+     
     # Select the element in the list, Put the list_no as the position of the tab, put the choice_no as the position of the element
     def select_group_choice(self, list_no, choice_no):
-        self.click_element_at_xpath('//*[@id="wdf_root_div_id"]/div[1]/div/div[1]/ul/li[' + list_no + ']/ul/li[' + choice_no + ']/span/span[1]', "Error while clicking Centre Choice")
+        self.click_element_at_xpath((constants.XPATH_GROUP_CHOICE.replace(constants.DUMMY_LIST_NO, list_no)).replace(constants.DUMMY_CHOICE_NO, choice_no), "Error while clicking Centre Choice")
 
     def select_group_and_group_choice(self, tab, group_no, list_no, choice_no):
         self.select_group(group_no , tab)
         self.select_group_choice(list_no, choice_no)
 
-    # Query the records, this will press the Query Button
-    def query_records(self, tab):
-        self.click_element_at_xpath('//*[@id="btnQuery"]/i',"Error while quering: " + tab + " tab")
-
-    # Fetch the records, this will press the Get button
-    def fetch_records(self, tab):
-        self.click_element_at_xpath('//*[@id="btnGet"]',"Error while fetching records for: " + tab + " tab")
-
-    # This will click on the export button on browser
-    def export_records_in_excel(self, tab):
-        self.click_element_at_xpath('//*[@id="wdf-list-view row-fluid"]/div/div[1]/div/button', "Error while exporting : " + tab + " tab")
-
-    def search_input(self, tab, search_input):
-        self.send_inputs_at_xpath('//*[@id="'+tab+'_Id_lookup"]',search_input, "Error while entering data to search " + tab + " tab")
-
     def click_select_button (self, tab):
-        self.click_element_at_xpath('//*[@id="divOptions"]/button',"Error while clicking select button: " + tab + " tab")
+        self.click_element_at_xpath(constants.XPATH_SELECT, constants.ERROR_SELECT.replace(constants.DUMMY_TAB,tab))
 
     def click_search_button (self, tab):
-        self.click_element_at_xpath('//*[@id="wdfScreenFieldSet"]/div/div/form/div[1]/fieldset/button',"Error while clicking search button: " + tab + " tab")
+        self.click_element_at_xpath(constants.XPATH_SEARCH ,"Error while clicking search button: " + tab + " tab")
 
     # This method is to login on page, username , password will come from environment
     def login_on_page(self, url, username, password):
-        self.load_page_in_browser(url, "Error Loading the page")
-        self.send_inputs_at_xpath('//*[@id="LoginId"]', username, "User Id Error")
-        self.send_inputs_at_xpath('//*[@id="Password"]', password, "Password Error" )
-        self.click_element_at_xpath('//*[@id="login-button"]',"Login Submit Error")
-
+        try:
+            self.log("\n\tPerforming login on the browser")
+            self.load_page_in_browser(url, "Error Loading the page")
+            self.send_keys_id(constants.FIELD_LOGIN, username)
+            self.send_keys_id(constants.FIELD_PASSWORD, password)
+            self.click_element_at_xpath(constants.XPATH_LOGIN, "Login Submit Error")
+        except Exception as ex:
+            self.log("Exception occurred in login: " + ex)
+        
     # Method to test the export
     def test_export(self, tab, group_no, list_no, choice_no):
+        self.log("\tPerforming export of the records for tab: " + tab)
         self.select_group_and_group_choice(tab, group_no, list_no, choice_no)
-        self.query_records(tab)
-        self.fetch_records(tab)
-        self.export_records_in_excel(tab)
-
+        self.press_button(constants.BUTTON_QUERY, tab)
+        self.press_button(constants.BUTTON_GET, tab)
+        self.click_element_at_xpath(constants.XPATH_EXPORT, constants.ERROR_EXPORT.replace(constants.DUMMY_TAB,tab))
+    
+    # Method to search something in a left hand tab
     def test_search(self, tab, group_no, list_no, choice_no, search_input):
+        self.log("\tPerforming the search with input: " + search_input + " on the search/select menu for tab: " + tab)
         self.select_group_and_group_choice(tab, group_no, list_no, choice_no)
-        self.search_input(tab, search_input)
+        self.send_keys_lookup(tab, search_input)
         time.sleep(1)
         self.click_select_button(tab)
         self.click_search_button(tab)
-
-    def logout(self):
-        self.click_element_at_xpath('//*[@id="wdf_root_div_id"]/div[1]/div/div[2]/div/div[2]/a[2]',"Logout Error")
-
+    
+    # Method to 
     def test_search_query(self, tab, group_no, list_no, choice_no, search_input):
+        self.log("\tPerforming the search with input: " + search_input + " on the query/search/select menu for tab: " + tab)
         self.select_group_and_group_choice(tab, group_no, list_no, choice_no)
-        self.query_records(tab)
-        self.search_input(tab, search_input)
+        self.press_button(constants.BUTTON_QUERY, tab)
+        self.send_keys_lookup(tab, search_input)
         self.click_select_button(tab)
-        self.fetch_records(tab)
+        self.press_button(constants.BUTTON_GET, tab)
+    
+    def test_centre_insert(self, tab, group_no, list_no, choice_no, insert_input):
+        self.log("\tPerforming the insert with input: " + insert_input + " on the tab: " + tab)
+        self.select_group_and_group_choice(tab, group_no, list_no, choice_no)
+        self.send_keys_lookup(tab, insert_input)
+        self.click_select_button(tab)
+        self.send_keys_lookup(constants.LAND_TYPE, Keys.DOWN)
+        self.send_keys_lookup(constants.OWNERSHIP_TYPE, Keys.DOWN)
+        self.send_keys_lookup(constants.LAND_NATURE, Keys.DOWN)
+        self.send_keys_id(constants.LAND_EXTENT, constants.TEST)
+        self.press_button(constants.BUTTON_SAVE, tab)
+        
+    def test_delete(self, tab, group_no, list_no, choice_no, search_input):
+        self.test_search_query(tab, group_no, list_no, choice_no, search_input)
+        self.press_button(constants.BUTTON_DELETE, tab)
+        self.click_element_at_xpath(constants.XPATH_CONFIRM,"Error while confirming in " + tab + " tab")
+
+    # Method to logout from the browser
+    def logout(self):
+        self.log("\tPerforming Logout")
+        self.click_element_at_xpath(constants.XPATH_LOGOUT, "Logout Error")
+    
+    def log(self, input):
+        print (input)
