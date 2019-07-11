@@ -7,6 +7,7 @@ from browser import Browser
 import constants
 import time
 import re
+from Centre import Centre
 
 class FiddleTest(unittest.TestCase):
     
@@ -59,7 +60,8 @@ class FiddleTest(unittest.TestCase):
     # This will insert centre details
     def test_4_Centre_Insert_Centre_Details(self):
         try:
-            self._browser.test_centre_insert(constants.TAB_CENTRE, constants.GROUP_NO_CENTRE, constants.LIST_NO_CENTRE, constants.CHOICE_1, "Gawla")
+            centre = Centre("Gawla", self._browser)
+            self._browser.test_insert(constants.TAB_CENTRE, constants.GROUP_NO_CENTRE, constants.LIST_NO_CENTRE, constants.CHOICE_1, centre)
         except Exception as ex:
             self.fail(ex)
 

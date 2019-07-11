@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException
-from selenium.webdriver.common.keys import Keys
 import time
 import constants
 
@@ -29,7 +28,7 @@ class Browser():
     def __del__(self):
       self._browser.quit()
 
-        # Load a particular page in the browser
+    # Load a particular page in the browser
     def load_page_in_browser(self, url, errorMsg):
         try:
             self._browser.get(url)
@@ -131,21 +130,14 @@ class Browser():
         self.click_select_button(tab)
         self.press_button(constants.BUTTON_GET, tab)
     
-    def test_centre_insert(self, tab, group_no, list_no, choice_no, insert_input):
-        self.log("\tPerforming the insert with input: " + insert_input + " on the tab: " + tab)
-        self.select_group_and_group_choice(tab, group_no, list_no, choice_no)
-        self.send_keys_lookup(tab, insert_input)
-        self.click_select_button(tab)
-        self.send_keys_lookup(constants.LAND_TYPE, Keys.DOWN)
-        self.send_keys_lookup(constants.OWNERSHIP_TYPE, Keys.DOWN)
-        self.send_keys_lookup(constants.LAND_NATURE, Keys.DOWN)
-        self.send_keys_id(constants.LAND_EXTENT, constants.TEST)
-        self.press_button(constants.BUTTON_SAVE, tab)
+    def test_insert(self, tab, group_no, list_no, choice_no, input_details):
+        print (type(input_details))
+        input_details.insert(tab, group_no, list_no, choice_no)
         
     def test_delete(self, tab, group_no, list_no, choice_no, search_input):
         self.test_search_query(tab, group_no, list_no, choice_no, search_input)
         self.press_button(constants.BUTTON_DELETE, tab)
-        self.click_element_at_xpath(constants.XPATH_CONFIRM,"Error while confirming in " + tab + " tab")
+        self.click_element_at_xpath(constants.XPATH_CONFIRM,"Error while confirming in " + tab + " tab")        
 
     # Method to logout from the browser
     def logout(self):
