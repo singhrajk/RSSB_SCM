@@ -3,11 +3,11 @@ import sys
 import os
 BASE_PATH = os.getenv('SCM_HOME',"")
 sys.path.extend([BASE_PATH + '/src/main/python/'])
-from browser import Browser
 import constants
 import time
 import re
 from Centre import Centre
+from Tab import Tab
 
 class FiddleTest(unittest.TestCase):
     
@@ -19,11 +19,11 @@ class FiddleTest(unittest.TestCase):
     # setup method, called once before all the tests
     @classmethod
     def setUpClass(self):
-        command_executor = os.getenv(constants.EXECUTOR,"")
+        
         username = os.getenv(constants.USERNAME,"")
         password = os.getenv(constants.PASSWORD,"")
         """Start web browser"""
-        self._browser = Browser(command_executor, constants.DELAY)
+        self._browser = Tab()
         self._browser.login_on_page(constants.DERA_SCM_URL, username, password)
     
     # setup method, called before each test
@@ -39,7 +39,7 @@ class FiddleTest(unittest.TestCase):
     # This will test search the centre schedule
     def test_1_Centre_Search_Schedule(self):
         try:
-            self._browser.test_search(constants.TAB_CENTRE, constants.GROUP_NO_CENTRE, constants.LIST_NO_CENTRE, constants.CHOICE_2, "ba")
+            Centre("ba").search_centre_schedule()
         except Exception as ex:
             self.fail(ex)
 
@@ -60,8 +60,7 @@ class FiddleTest(unittest.TestCase):
     # This will insert centre details
     def test_4_Centre_Insert_Centre_Details(self):
         try:
-            centre = Centre("Gawla", self._browser)
-            self._browser.test_insert(constants.TAB_CENTRE, constants.GROUP_NO_CENTRE, constants.LIST_NO_CENTRE, constants.CHOICE_1, centre)
+            Centre("Gawla").search_centre_schedule()
         except Exception as ex:
             self.fail(ex)
 
@@ -85,6 +84,7 @@ class FiddleTest(unittest.TestCase):
             self._browser.test_export(constants.TAB_PREACHER, constants.GROUP_NO_PREACHER, constants.LIST_NO_PREACHER, constants.CHOICE_1)
         except Exception as ex:
             self.fail(ex)
+    
     
     # This will run at end of each test
     def tearDown(self):

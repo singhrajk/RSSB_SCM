@@ -2,28 +2,28 @@
 """
 Created on Wed Jul 10 20:11:49 2019
 
-@author: Niharika Jaidka
+@author: Rana Rajput
 """
-from Browser import Browser
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import WebDriverException
+from browser import Browser
 import time
 import constants
 
-class Tab:
+class Tab(object):
     
-    def __init__(self, browser):
-        self._browser = browser
+    def __init__(self):
+        self._browser = Browser.getInstance()
+        self._delay = constants.DELAY
         
      # Load a particular page in the browser
     def load_page_in_browser(self, url, errorMsg):
-        try:
-            self._browser.get(url)
-        except:
+        try:  
+            Browser.getInstance().get(url)
+        except Exception as ex:
             self.log(errorMsg)
+            self.log(ex)
 
     # Get Element From XPath after when the element is present
     def get_element_from_xpath(self, xpath, wait):
@@ -42,18 +42,20 @@ class Tab:
     def send_inputs_at_xpath(self, xpath, keys, errorMsg):
         try:
             element = self.get_element_from_xpath(xpath, constants.WAIT_FOR_PRESENCE_AND_CLICKABLE)
-            element.clear()
+            #element.clear()
             element.send_keys(keys)
-        except:
+        except Exception as ex:
             self.log(errorMsg)
+            self.log(ex)
 
     # Click the element available at the X Path after it is Present & Clickable
     def click_element_at_xpath(self, xpath, errorMsg):
         try:
             element = self.get_element_from_xpath(xpath, constants.WAIT_FOR_PRESENCE_AND_CLICKABLE)
             element.click()
-        except:
+        except Exception as ex:
             self.log(errorMsg)
+            self.log(ex)
 
     # Select group on the screen
     def select_group(self, group_no, tab):
@@ -92,7 +94,8 @@ class Tab:
             self.send_keys_id(constants.FIELD_PASSWORD, password)
             self.click_element_at_xpath(constants.XPATH_LOGIN, "Login Submit Error")
         except Exception as ex:
-            self.log("Exception occurred in login: " + ex)
+            self.log("Exception occurred in login: ")
+            self.log(ex)
         
     # Method to test the export
     def test_export(self, tab, group_no, list_no, choice_no):
@@ -119,12 +122,6 @@ class Tab:
         self.send_keys_lookup(tab, search_input)
         self.click_select_button(tab)
         self.press_button(constants.BUTTON_GET, tab)
-    
-    def test_insert(self, tab, group_no, list_no, choice_no, input_details):
-        self.select_group_and_group_choice(tab, group_no, list_no, choice_no)
-        browser = self
-        print (type(input_details))
-        input_details.insert(tab, group_no, list_no, choice_no, browser)
         
     def test_delete(self, tab, group_no, list_no, choice_no, search_input):
         self.test_search_query(tab, group_no, list_no, choice_no, search_input)
@@ -138,3 +135,5 @@ class Tab:
     
     def log(self, input):
         print (input)
+    
+       
