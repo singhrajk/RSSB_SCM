@@ -33,6 +33,7 @@ BUTTON_SAVE = "Save"
 BUTTON_QUERY = "Query"
 BUTTON_GET = "Get"
 BUTTON_DELETE = "Delete"
+BUTTON_INSERT = "Insert"
 FIELD_LOGIN = "LoginId"
 FIELD_PASSWORD = "Password"
 
@@ -69,7 +70,7 @@ USERNAME = "SITE_LOGIN_USER"
 PASSWORD = "SITE_LOGIN_PWD"
 
 ## Console Constants
-TEST_NUMBER_PATTERN = '^test_[0-9 ]*'
+TEST_NUMBER_PATTERN = '^test_[0-9 ]*_'
 EMPTY = ''
 NEW_LINE = "\n"
 UNDERSCORE = "_"

@@ -9,12 +9,13 @@ import re
 from centre import Centre
 from tab import Tab
 
-class FiddleTest(unittest.TestCase):
+class CentreTest(unittest.TestCase):
 
     # Method getting the test name
     def getTestName(self):
         test_name = re.sub(constants.TEST_NUMBER_PATTERN, constants.EMPTY, self._testMethodName, 1).title()
-        return test_name.replace(constants.UNDERSCORE, constants.SPACE)
+        test_name = self.__class__.__name__ + " : " + test_name.replace(constants.UNDERSCORE, constants.SPACE)
+        return test_name
 
     # setup method, called once before all the tests
     @classmethod
@@ -23,7 +24,7 @@ class FiddleTest(unittest.TestCase):
         password = os.getenv(constants.PASSWORD,"")
         """Start web browser"""
         self._browser = Tab()
-        self._browser.login_on_page(constants.DERA_SCM_URL, username, password)
+        #self._browser.login_on_page(constants.DERA_SCM_URL, username, password)
 
     # setup method, called before each test
     def setUp(self):
@@ -31,21 +32,39 @@ class FiddleTest(unittest.TestCase):
         self._browser.log(constants.STARS_START_LINE)
         self._browser.log(constants.TEST_START  + self.getTestName())
 
-    # Do Nothing
-    def test_0_login(self):
-        pass
-
-    # This will search a sewadar
-    def test_6_preacher_search_sewadar_details(self):
+    # This will test search the centre schedule
+    def test_1_search_schedule(self):
         try:
-            self._browser.search_query(constants.LOOKUP_SEWADAR, constants.GROUP_NO_PREACHER, constants.LIST_NO_PREACHER, constants.CHOICE_1, "GUL")
+            print(self.getTestName())
+            #Centre().search_schedule("ba")
         except Exception as ex:
             self.fail(ex)
 
-    # This will test export the preachers
-    def test_7_preacher_export_preacher_details(self):
+    # This will search a particular centre details
+    def test_2_search_details(self):
         try:
-            self._browser.export(constants.TAB_PREACHER, constants.GROUP_NO_PREACHER, constants.LIST_NO_PREACHER, constants.CHOICE_1)
+            Centre().search_details("bangalore")
+        except Exception as ex:
+            self.fail(ex)
+
+    # This will delete centre details
+    def test_3_delete_details(self):
+        try:
+            Centre().delete_details("Gawla")
+        except Exception as ex:
+            self.fail(ex)
+
+    # This will insert centre details
+    def test_4_insert_details(self):
+        try:
+            Centre().insert_details("Gawla")
+        except Exception as ex:
+            self.fail(ex)
+
+    # This will test export the centers
+    def test_5_export_details(self):
+        try:
+            Centre().export_details()
         except Exception as ex:
             self.fail(ex)
 
@@ -59,11 +78,11 @@ class FiddleTest(unittest.TestCase):
     @classmethod
     def tearDownClass(self):
         """Logout browser"""
-        try:
-            time.sleep(2)
-            self._browser.logout();
-        except Exception as ex:
-            raise Exception("Tear Down Failed : {}.".format(ex))
+        # try:
+        #     time.sleep(2)
+        #     self._browser.logout();
+        # except Exception as ex:
+        #     raise Exception("Tear Down Failed : {}.".format(ex))
         time.sleep(4)
         self._browser = None
 
