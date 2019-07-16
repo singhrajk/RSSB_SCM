@@ -24,7 +24,7 @@ class CentreTest(unittest.TestCase):
         password = os.getenv(constants.PASSWORD,"")
         """Start web browser"""
         self._browser = Tab()
-        #self._browser.login_on_page(constants.DERA_SCM_URL, username, password)
+        self._browser.login_on_page(constants.DERA_SCM_URL, username, password)
 
     # setup method, called before each test
     def setUp(self):
@@ -35,8 +35,7 @@ class CentreTest(unittest.TestCase):
     # This will test search the centre schedule
     def test_1_search_schedule(self):
         try:
-            print(self.getTestName())
-            #Centre().search_schedule("ba")
+            Centre().search_schedule("ba")
         except Exception as ex:
             self.fail(ex)
 
@@ -78,11 +77,11 @@ class CentreTest(unittest.TestCase):
     @classmethod
     def tearDownClass(self):
         """Logout browser"""
-        # try:
-        #     time.sleep(2)
-        #     self._browser.logout();
-        # except Exception as ex:
-        #     raise Exception("Tear Down Failed : {}.".format(ex))
+        try:
+            time.sleep(2)
+            self._browser.logout();
+        except Exception as ex:
+            raise Exception("Tear Down Failed : {}.".format(ex))
         time.sleep(4)
         self._browser = None
 
