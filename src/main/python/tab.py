@@ -11,7 +11,8 @@ class Tab(object):
         self._browser = Browser.getInstance()
         self._delay = constants.DELAY
 
-    def __del__(self):
+    def quit(self):
+        self.log("Quitting Browser")
         self._browser.quit()
 
      # Load a particular page in the browser

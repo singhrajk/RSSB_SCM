@@ -18,8 +18,8 @@ class Centre(Tab):
     def insert_details(self, input):
         self.select_group_and_group_choice(TAB_CENTRE, GROUP_NO_CENTRE, LIST_NO_CENTRE, constants.CHOICE_1)
         self.log("\tPerforming the insert with input: " + input + " on the tab: " + TAB_CENTRE)
-        self.send_keys_lookup(TAB_CENTRE, input)
-        self.click_select_button(TAB_CENTRE)
+        self.send_keys_lookup(constants.TAB_CENTRE, input)
+        self.click_select_button(constants.TAB_CENTRE)
         self.send_keys_lookup(constants.LAND_TYPE, Keys.DOWN)
         self.send_keys_lookup(constants.OWNERSHIP_TYPE, Keys.DOWN)
         self.send_keys_lookup(constants.LAND_NATURE, Keys.DOWN)

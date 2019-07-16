@@ -37,35 +37,35 @@ class CentreTest(unittest.TestCase):
         try:
             Centre().search_schedule("ba")
         except Exception as ex:
-            self.fail(ex)
+            self.fail(str(ex.message))
 
     # This will search a particular centre details
     def test_2_search_details(self):
         try:
             Centre().search_details("bangalore")
         except Exception as ex:
-            self.fail(ex)
+            self.fail(str(ex.message))
 
     # This will delete centre details
     def test_3_delete_details(self):
         try:
             Centre().delete_details("Gawla")
         except Exception as ex:
-            self.fail(ex)
+            self.fail(str(ex.message))
 
     # This will insert centre details
     def test_4_insert_details(self):
         try:
             Centre().insert_details("Gawla")
         except Exception as ex:
-            self.fail(ex)
+            self.fail(str(ex.message))
 
     # This will test export the centers
     def test_5_export_details(self):
         try:
             Centre().export_details()
         except Exception as ex:
-            self.fail(ex)
+            self.fail(str(ex.message))
 
     # This will run at end of each test
     def tearDown(self):
@@ -83,7 +83,7 @@ class CentreTest(unittest.TestCase):
         except Exception as ex:
             raise Exception("Tear Down Failed : {}.".format(ex))
         time.sleep(4)
-        self._browser = None
+        self._browser.quit()
 
     # Method to log the result
     def logResult(self):
