@@ -5,16 +5,16 @@ import os
 import constants
 
 class Browser:
-    
+
     __instance = None
-    
-    @staticmethod 
+
+    @staticmethod
     def getInstance():
         """ Static access method. """
         if Browser.__instance == None:
             Browser()
         return Browser.__instance
-    
+
     def __init__(self):
         """ Virtually private constructor. """
         if Browser.__instance != None:
@@ -35,7 +35,3 @@ class Browser:
                 print ("%s" % dir(s))
                 if "Empty pool of VM for setup Capabilities" not in s:
                     raise
-
-    def __del__(self):
-        pass
-        #Browser.__instance.quit()

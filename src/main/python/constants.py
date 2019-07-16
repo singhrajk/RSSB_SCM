@@ -70,7 +70,7 @@ USERNAME = "SITE_LOGIN_USER"
 PASSWORD = "SITE_LOGIN_PWD"
 
 ## Console Constants
-TEST_NUMBER_PATTERN = '^test_[0-9 ]*'
+TEST_NUMBER_PATTERN = '^test_[0-9 ]*_'
 EMPTY = ''
 NEW_LINE = "\n"
 UNDERSCORE = "_"
