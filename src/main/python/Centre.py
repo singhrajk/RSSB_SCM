@@ -34,13 +34,13 @@ class Centre(Tab):
     def search(self, choice_no):
        super(Centre, self).search(choice_no)       
        ##ROW 1 BANGALORE 
-       self._assert.test_element_value(constants.ROW_1, constants.COLUMN_2, "Week 1", "text")
-       self._assert.test_element_value(constants.ROW_1, constants.COLUMN_3, "Sunday", "text")
-       self._assert.test_element_value(constants.ROW_1, constants.COLUMN_4, "09:30:00", "text")
-       self._assert.test_element_value(constants.ROW_1, constants.COLUMN_5, "Hindi", "text")
+       #self._assert.test_element_value(constants.ROW_1, constants.COLUMN_2, "Week 1", "text")
+       #self._assert.test_element_value(constants.ROW_1, constants.COLUMN_3, "Sunday", "text")
+       #self._assert.test_element_value(constants.ROW_1, constants.COLUMN_4, "09:30:00", "text")
+       #self._assert.test_element_value(constants.ROW_1, constants.COLUMN_5, "Hindi", "text")
        ## ROW 2 BANGALORE
-       self._assert.test_element_value(constants.ROW_2, constants.COLUMN_2, "Week 2", "text")
-       self._assert.test_element_value(constants.ROW_2, constants.COLUMN_3, "Sunday", "text")
-       self._assert.test_element_value(constants.ROW_2, constants.COLUMN_4, "09:30:00", "text")
-       self._assert.test_element_value(constants.ROW_2, constants.COLUMN_5, "English", "text")
+       #self._assert.test_element_value(constants.ROW_2, constants.COLUMN_2, "Week 2", "text")
+       #self._assert.test_element_value(constants.ROW_2, constants.COLUMN_3, "Sunday", "text")
+       #self._assert.test_element_value(constants.ROW_2, constants.COLUMN_4, "09:30:00", "text")
+       #self._assert.test_element_value(constants.ROW_2, constants.COLUMN_5, "English", "text")
    
