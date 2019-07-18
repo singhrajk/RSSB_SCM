@@ -31,5 +31,5 @@ class BrowserBase(object):
         return element
         
     def quit(self):
-        self.log("Quitting Browser")
+        self.log("\tQuitting Browser")
         self._browser.quit()
