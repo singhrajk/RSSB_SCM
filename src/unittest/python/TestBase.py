@@ -10,7 +10,6 @@ import constants
 import os
 import time
 import sys
-from Browser import Browser
 from Tab import Tab
 
 class TestBase(unittest.TestCase):
@@ -50,9 +49,9 @@ class TestBase(unittest.TestCase):
             time.sleep(2)
             self._browser.logout();
         except Exception as ex:
-            self.fail(ex)
+            raise Exception("Tear Down Failed : {}.".format(ex))
         time.sleep(4)
-        Browser.quit()
+        self._browser.quit()
     
     # Method to log the result
     def logResult(self):

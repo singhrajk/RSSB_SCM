@@ -20,8 +20,7 @@ class Tab(BrowserBase):
         try:  
             self._browser.get(url)
         except Exception as ex:
-            self.log(errorMsg)
-            self.log(ex)
+            self.log(str(ex.message) + errorMsg)
 
     # Sends Input keys at a particular input on x path after it is present
     def send_inputs_at_xpath(self, xpath, keys, errorMsg):
@@ -30,8 +29,7 @@ class Tab(BrowserBase):
             #element.clear()
             element.send_keys(keys)
         except Exception as ex:
-            self.log(errorMsg)
-            self.log(ex)
+            self.log(str(ex.message) + errorMsg)
 
     # Click the element available at the X Path after it is Present & Clickable
     def click_element_at_xpath(self, xpath, errorMsg):
@@ -39,8 +37,7 @@ class Tab(BrowserBase):
             element = self.get_element_from_xpath(xpath, constants.WAIT_FOR_PRESENCE_AND_CLICKABLE)
             element.click()
         except Exception as ex:
-            self.log(errorMsg)
-            self.log(ex)
+            self.log(str(ex.message) + errorMsg)
 
     # Select group on the screen
     def select_group(self, group_no, tab):
@@ -79,8 +76,7 @@ class Tab(BrowserBase):
             self.send_keys_id(constants.FIELD_PASSWORD, password)
             self.click_element_at_xpath(XPATH.LOGIN, "Login Submit Error")
         except Exception as ex:
-            self.log("Exception occurred in login: ")
-            self.log(ex)
+            self.log("Exception occurred in login: " + str(ex.message))
         
     # Method to test the export
     def export(self, choice_no):

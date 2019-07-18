@@ -30,3 +30,6 @@ class BrowserBase(object):
         element = self._browser.find_element_by_xpath(xpath)
         return element
         
+    def quit(self):
+        self.log("Quitting Browser")
+        self._browser.quit()
