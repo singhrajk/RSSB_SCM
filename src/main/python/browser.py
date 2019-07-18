@@ -35,7 +35,11 @@ class Browser:
                 print ("%s" % dir(s))
                 if "Empty pool of VM for setup Capabilities" not in s:
                     raise
-
+                    
     def __del__(self):
         pass
-        #Browser.__instance.quit()
+    
+    @staticmethod
+    def quit():    
+        if Browser.__instance != None:
+           Browser.__instance.quit()
