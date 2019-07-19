@@ -60,7 +60,7 @@ class FiddleTest(TestBase):
             self.fail(ex)   
     
     # This will test search the preacher language
-    def test_8_Preacher_Preacher_Language(self):
+    def test_8_Preacher_Language(self):
         try:
             Preacher("GUL").search(constants.CHOICE_2)
         except Exception as ex:
