@@ -19,7 +19,7 @@ class Assert(BrowserBase):
             print ("\tElement was selected at row: " + row_no + " and column: " + col_no)
     
     def test_element_value_xpath(self, xpath, expected_value, by="value"):
-        element = self.get_element_from_xpath(xpath, constants.DONT_WAIT)
+        element = self.get_element_from_xpath(xpath, constants.WAIT_FOR_PRESENCE)
         actual_value = element.get_attribute("value")
         if not actual_value == expected_value:
             assert False, ("EXPECTED VALUE IS: " + expected_value + " HOWEVER ACTUAL VALUE IS: " + actual_value)

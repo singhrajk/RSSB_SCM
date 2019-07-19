@@ -18,7 +18,7 @@ class BrowserBase(object):
         self._delay = constants.DELAY
     
     # Get Element From XPath after when the element is present
-    def get_element_from_xpath(self, xpath, wait):
+    def get_element_from_xpath(self, xpath, wait=constants.DONT_WAIT):
         if wait == constants.WAIT_FOR_PRESENCE:
                 WebDriverWait(self._browser, self._delay).until(EC.presence_of_element_located((By.XPATH, xpath)))
         elif wait == constants.WAIT_FOR_CLICKABLE:
