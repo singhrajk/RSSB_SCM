@@ -26,12 +26,12 @@ class Preacher(Tab):
        super(Preacher, self).search(choice_no)       
        ##ROW 1 GUL H MAKHIJA 
        self._assert.test_if_element_selected(constants.ROW_1, constants.COLUMN_1)
-       self._assert.test_element_value(constants.ROW_1, constants.COLUMN_3, "1672/ BANGALORE -C/KR/415")
-       self._assert.test_element_value(constants.ROW_1, constants.COLUMN_4, "2003-01-13")
-       self._assert.test_element_value(constants.ROW_1, constants.COLUMN_5, "Senior Sewadar")
+       self._assert.test_element_value_screenfield(constants.ROW_1, constants.COLUMN_3, "1672/ BANGALORE -C/KR/415")
+       self._assert.test_element_value_screenfield(constants.ROW_1, constants.COLUMN_4, "2003-01-13")
+       self._assert.test_element_value_screenfield(constants.ROW_1, constants.COLUMN_5, "Senior Sewadar")
        ## ROW 2 GUL H MAKHIJA 
        self._assert.test_if_element_selected(constants.ROW_2, constants.COLUMN_1)
-       self._assert.test_element_value(constants.ROW_2, constants.COLUMN_3, "1672/ BANGALORE -C/KR/415")
-       self._assert.test_element_value(constants.ROW_2, constants.COLUMN_4, "2003-01-13")
-       self._assert.test_element_value(constants.ROW_2, constants.COLUMN_5, "Senior Sewadar")
+       self._assert.test_element_value_screenfield(constants.ROW_2, constants.COLUMN_3, "1672/ BANGALORE -C/KR/415")
+       self._assert.test_element_value_screenfield(constants.ROW_2, constants.COLUMN_4, "2003-01-13")
+       self._assert.test_element_value_screenfield(constants.ROW_2, constants.COLUMN_5, "Senior Sewadar")
    

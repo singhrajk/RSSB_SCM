@@ -23,7 +23,7 @@ class Tab(BrowserBase):
             self.log(str(ex.message) + errorMsg)
 
     # Sends Input keys at a particular input on x path after it is present
-    def send_inputs_at_xpath(self, xpath, keys, errorMsg):
+    def send_inputs_at_xpath(self, xpath, keys, errorMsg="key could not be pressed"):
         try:
             element = self.get_element_from_xpath(xpath, constants.WAIT_FOR_PRESENCE_AND_CLICKABLE)
             #element.clear()
@@ -32,7 +32,7 @@ class Tab(BrowserBase):
             self.log(str(ex.message) + errorMsg)
 
     # Click the element available at the X Path after it is Present & Clickable
-    def click_element_at_xpath(self, xpath, errorMsg):
+    def click_element_at_xpath(self, xpath, errorMsg="Failed to click the button"):
         try:
             element = self.get_element_from_xpath(xpath, constants.WAIT_FOR_PRESENCE_AND_CLICKABLE)
             element.click()

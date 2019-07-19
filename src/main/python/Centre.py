@@ -7,6 +7,7 @@ Created on Tue Jul  9 08:12:23 2019
 from selenium.webdriver.common.keys import Keys
 from Tab import Tab
 import constants
+import XPATH
 
 class Centre(Tab):
     
@@ -32,15 +33,14 @@ class Centre(Tab):
         self.press_button(constants.BUTTON_SAVE, self._tab)
         
     def search(self, choice_no):
-       super(Centre, self).search(choice_no)       
-       ##ROW 1 BANGALORE 
-       #self._assert.test_element_value(constants.ROW_1, constants.COLUMN_2, "Week 1", "text")
-       #self._assert.test_element_value(constants.ROW_1, constants.COLUMN_3, "Sunday", "text")
-       #self._assert.test_element_value(constants.ROW_1, constants.COLUMN_4, "09:30:00", "text")
-       #self._assert.test_element_value(constants.ROW_1, constants.COLUMN_5, "Hindi", "text")
-       ## ROW 2 BANGALORE
-       #self._assert.test_element_value(constants.ROW_2, constants.COLUMN_2, "Week 2", "text")
-       #self._assert.test_element_value(constants.ROW_2, constants.COLUMN_3, "Sunday", "text")
-       #self._assert.test_element_value(constants.ROW_2, constants.COLUMN_4, "09:30:00", "text")
-       #self._assert.test_element_value(constants.ROW_2, constants.COLUMN_5, "English", "text")
-   
+        super(Centre, self).search(choice_no)
+        self.send_inputs_at_xpath(XPATH.SCREENFIELD_INPUT, "Week 4")
+        self.click_element_at_xpath((XPATH.SCREENFIELD_TABLE_HREF.replace(constants.DUMMY_ROW_NO, "1").replace(constants.DUMMY_COLUMN_NO, "6")))       
+        print ("\tTEST for BANGALORE CENTRE , WEEK 4 Schedule\n")       
+        self._assert.test_element_value_lookup(constants.CENTRE, "Bangalore")
+        #self._assert.test_element_value_lookup("week", "Week 4")
+        #self._assert.test_element_value_lookup("weekday", "Sunday")  
+        self._assert.test_element_value_lookup(constants.LANGUAGE, "Audio/Video")
+        self._assert.test_element_value_xpath(XPATH.TIME,"09:30:00.000")
+        #self._assert.test_element_value_xpath(XPATH.STATUS,"Active")
+        self.click_element_at_xpath(XPATH.CLOSE_BUTTON)

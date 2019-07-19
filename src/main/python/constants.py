@@ -21,6 +21,8 @@ COLUMN_4 = "4"
 COLUMN_5 = "5"
 
 LOOKUP_SEWADAR ="sewadar"
+CENTRE = "centre"
+LANGUAGE = "language"
 
 LAND_TYPE = "landDetails_land_type"
 OWNERSHIP_TYPE = "landDetails_ownership_type"
