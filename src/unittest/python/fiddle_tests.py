@@ -3,6 +3,7 @@ import sys
 import os
 BASE_PATH = os.getenv('SCM_HOME',"")
 sys.path.extend([BASE_PATH + '/src/main/python/'])
+
 from TestBase import TestBase
 from Centre import Centre
 from Preacher import Preacher
@@ -46,14 +47,14 @@ class FiddleTest(TestBase):
             self.fail(ex)
     
     # This will search a sewadar
-    def test_6_Preacher_Search_Sewadar_Details(self):
+    def test_6_preacher_search_sewadar_details(self):
         try:
             Preacher("GUL").query_search()
         except Exception as ex:
             self.fail(ex)
 
     # This will test export the preachers
-    def test_7_Preacher_Export_Preacher_Details(self):
+    def test_7_preacher_export_preacher_details(self):
         try:
             Preacher().export(constants.CHOICE_1)
         except Exception as ex:
