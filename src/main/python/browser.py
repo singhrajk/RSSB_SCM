@@ -4,6 +4,7 @@ from selenium.common.exceptions import WebDriverException
 import os
 import constants
 
+# Browser Class to assign the browser (Chrome/Firefox/IE)
 class Browser:
     
     __instance = None
