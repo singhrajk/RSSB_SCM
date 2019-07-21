@@ -5,10 +5,10 @@ import os
 import constants
 
 class Browser:
-
+    
     __instance = None
-
-    @staticmethod
+    
+    @staticmethod 
     def getInstance():
         """ Static access method. """
         if Browser.__instance == None:

@@ -3,76 +3,69 @@ import sys
 import os
 BASE_PATH = os.getenv('SCM_HOME',"")
 sys.path.extend([BASE_PATH + '/src/main/python/'])
+
+from TestBase import TestBase
+from Centre import Centre
+from Preacher import Preacher
 import constants
-import time
-import re
-from centre import Centre
-from tab import Tab
 
-class FiddleTest(unittest.TestCase):
+class FiddleTest(TestBase):
+    
+    # This will test search the centre schedule
+    def test_1_Centre_Search_Schedule(self):
+        try:
+            Centre("ba").search(constants.CHOICE_2)
+        except Exception as ex:
+            self.fail(ex)
 
-    # Method getting the test name
-    def getTestName(self):
-        test_name = re.sub(constants.TEST_NUMBER_PATTERN, constants.EMPTY, self._testMethodName, 1).title()
-        return test_name.replace(constants.UNDERSCORE, constants.SPACE)
+    # This will search a particular centre details
+    def test_2_Centre_Search_Centre_Details(self):
+        try:
+            Centre("bangalore").query_search()
+        except Exception as ex:
+            self.fail(ex)
+    
+    # This will delete centre details
+    def test_3_Centre_Delete_Centre_Details(self):
+        try:
+            Centre("Gawla").delete(constants.CHOICE_1)
+        except Exception as ex:
+            self.fail(ex)
+    
+    # This will insert centre details
+    def test_4_Centre_Insert_Centre_Details(self):
+        try:
+            Centre("Gawla").insert()
+        except Exception as ex:
+            self.fail(ex)
 
-    # setup method, called once before all the tests
-    @classmethod
-    def setUpClass(self):
-        username = os.getenv(constants.USERNAME,"")
-        password = os.getenv(constants.PASSWORD,"")
-        """Start web browser"""
-        self._browser = Tab()
-        self._browser.login_on_page(constants.DERA_SCM_URL, username, password)
-
-    # setup method, called before each test
-    def setUp(self):
-        time.sleep(2)
-        self._browser.log(constants.STARS_START_LINE)
-        self._browser.log(constants.TEST_START  + self.getTestName())
-
-    # Do Nothing
-    def test_0_login(self):
-        pass
-
+    # This will test export the centers
+    def test_5_Centre_Export_Centre_Details(self):
+        try:
+            Centre().export(constants.CHOICE_1)
+        except Exception as ex:
+            self.fail(ex)
+    
     # This will search a sewadar
     def test_6_preacher_search_sewadar_details(self):
         try:
-            self._browser.search_query(constants.LOOKUP_SEWADAR, constants.GROUP_NO_PREACHER, constants.LIST_NO_PREACHER, constants.CHOICE_1, "GUL")
+            Preacher("GUL").query_search()
         except Exception as ex:
             self.fail(ex)
 
     # This will test export the preachers
     def test_7_preacher_export_preacher_details(self):
         try:
-            self._browser.export(constants.TAB_PREACHER, constants.GROUP_NO_PREACHER, constants.LIST_NO_PREACHER, constants.CHOICE_1)
+            Preacher().export(constants.CHOICE_1)
+        except Exception as ex:
+            self.fail(ex)   
+    
+    # This will test search the preacher language
+    def test_8_Preacher_Language(self):
+        try:
+            Preacher("GUL").search(constants.CHOICE_2)
         except Exception as ex:
             self.fail(ex)
-
-    # This will run at end of each test
-    def tearDown(self):
-        self._browser.log(constants.TEST_FINSIH  + self.getTestName())
-        self.logResult()
-        self._browser.log(constants.STARS_END_LINE)
-
-    # This will run at end of all tests
-    @classmethod
-    def tearDownClass(self):
-        """Logout browser"""
-        try:
-            time.sleep(2)
-            self._browser.logout();
-        except Exception as ex:
-            raise Exception("Tear Down Failed : {}.".format(ex))
-        time.sleep(4)
-        self._browser = None
-
-    # Method to log the result
-    def logResult(self):
-        if sys.exc_info() == (None, None, None):
-            self._browser.log(constants.TEST_PASS)
-        else:
-            self._browser.log(constants.TEST_FAIL)
-
+    
 if __name__ == '__main__':
     unittest.main()
