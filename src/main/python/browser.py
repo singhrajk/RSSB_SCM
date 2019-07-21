@@ -14,7 +14,7 @@ class Browser:
         if Browser.__instance == None:
             Browser()
         return Browser.__instance
-    
+
     def __init__(self):
         """ Virtually private constructor. """
         if Browser.__instance != None:
