@@ -4,6 +4,7 @@ from selenium.common.exceptions import WebDriverException
 import os
 import constants
 
+# Browser Class to assign the browser (Chrome/Firefox/IE)
 class Browser:
     
     __instance = None
@@ -14,7 +15,7 @@ class Browser:
         if Browser.__instance == None:
             Browser()
         return Browser.__instance
-
+    
     def __init__(self):
         """ Virtually private constructor. """
         if Browser.__instance != None:

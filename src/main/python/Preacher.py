@@ -6,6 +6,7 @@ Created on Wed Jul 17 07:32:49 2019
 """
 from Tab import Tab
 import constants
+import XPATH
 
 class Preacher(Tab):
 
@@ -25,13 +26,13 @@ class Preacher(Tab):
     def search(self, choice_no):
        super(Preacher, self).search(choice_no)       
        ##ROW 1 GUL H MAKHIJA 
-       self._assert.test_if_element_selected(constants.ROW_1, constants.COLUMN_1)
-       self._assert.test_element_value_screenfield(constants.ROW_1, constants.COLUMN_3, "1672/ BANGALORE -C/KR/415")
-       self._assert.test_element_value_screenfield(constants.ROW_1, constants.COLUMN_4, "2003-01-13")
-       self._assert.test_element_value_screenfield(constants.ROW_1, constants.COLUMN_5, "Senior Sewadar")
+
+       self._assert.test_if_element_selected(XPATH.SCREEN_INPUT_ROW1_COL1)
+       self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW1_COL3, "1672/ BANGALORE -C/KR/415")
+       self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW1_COL4, "2003-01-13")
+       self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW1_COL5, "Senior Sewadar")
        ## ROW 2 GUL H MAKHIJA 
-       self._assert.test_if_element_selected(constants.ROW_2, constants.COLUMN_1)
-       self._assert.test_element_value_screenfield(constants.ROW_2, constants.COLUMN_3, "1672/ BANGALORE -C/KR/415")
-       self._assert.test_element_value_screenfield(constants.ROW_2, constants.COLUMN_4, "2003-01-13")
-       self._assert.test_element_value_screenfield(constants.ROW_2, constants.COLUMN_5, "Senior Sewadar")
-   
+       self._assert.test_if_element_selected(XPATH.SCREEN_INPUT_ROW2_COL1)
+       self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW2_COL3, "1672/ BANGALORE -C/KR/415")
+       self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW2_COL4, "2003-01-13")
+       self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW2_COL5, "Senior Sewadar")   
