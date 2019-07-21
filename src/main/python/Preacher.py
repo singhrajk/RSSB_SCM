@@ -26,6 +26,7 @@ class Preacher(Tab):
     def search(self, choice_no):
        super(Preacher, self).search(choice_no)       
        ##ROW 1 GUL H MAKHIJA 
+
        self._assert.test_if_element_selected(XPATH.SCREEN_INPUT_ROW1_COL1)
        self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW1_COL3, "1672/ BANGALORE -C/KR/415")
        self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW1_COL4, "2003-01-13")
@@ -34,5 +35,4 @@ class Preacher(Tab):
        self._assert.test_if_element_selected(XPATH.SCREEN_INPUT_ROW2_COL1)
        self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW2_COL3, "1672/ BANGALORE -C/KR/415")
        self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW2_COL4, "2003-01-13")
-       self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW2_COL5, "Senior Sewadar")
-   
+       self._assert.test_element_value_xpath(XPATH.SCREEN_INPUT_ROW2_COL5, "Senior Sewadar")   

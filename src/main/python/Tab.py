@@ -128,5 +128,3 @@ class Tab(BrowserBase):
     
     def log(self, input):
         print (input)
-    
-       

@@ -29,5 +29,3 @@ class Assert(BrowserBase):
             assert False, "\tElement was not selected"
         else: 
             print ("\tElement was selected")
-        
-   
