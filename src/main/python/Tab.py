@@ -36,6 +36,7 @@ class Tab(BrowserBase):
             else:
                 element = self.get_element(xpath, constants.WAIT_FOR_PRESENCE_AND_CLICKABLE)
                 self.clear(element, clear)
+                element.click()
                 element.send_keys(keys)
         except Exception as ex:
             self.log(str(ex.message) + errorMsg + keys)
