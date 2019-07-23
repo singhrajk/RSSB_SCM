@@ -11,57 +11,65 @@ import constants
 
 class FiddleTest(TestBase):
     
-    # This will test search the centre schedule
-    def test_1_Centre_Search_Schedule(self):
-        try:
-            Centre("ba").search(constants.CHOICE_2)
-        except Exception as ex:
-            self.fail(ex)
-
-    # This will search a particular centre details
-    def test_2_Centre_Search_Centre_Details(self):
-        try:
-            Centre("bangalore").query_search()
-        except Exception as ex:
-            self.fail(ex)
-    
     # This will delete centre details
-    def test_3_Centre_Delete_Centre_Details(self):
+    def test_1_Centre_Delete(self):
         try:
             Centre("Gawla").delete(constants.CHOICE_1)
         except Exception as ex:
             self.fail(ex)
     
-    # This will insert centre details
-    def test_4_Centre_Insert_Centre_Details(self):
+    # This will insert centre details using tab
+    def test_2_Centre_Insert(self):
         try:
             Centre("Gawla").insert()
         except Exception as ex:
             self.fail(ex)
+            
+    # This will search a particular centre details and check the details are inserted using x path
+    def test_3_Centre_Search(self):
+        try:
+            Centre("Gawla").query_search()
+        except Exception as ex:
+            self.fail(ex)     
 
+    # This will update the centre details using shift reverse tab(shift + tab) and test the details are updated using x path
+    def test_4_Centre_Update(self):
+        try:
+            # Centre("Gawla").update() 
+            pass
+        except Exception as ex:
+            self.fail(ex)     
+    
     # This will test export the centers
-    def test_5_Centre_Export_Centre_Details(self):
+    def test_5_Centre_View_Export(self):
         try:
             Centre().export(constants.CHOICE_1)
         except Exception as ex:
             self.fail(ex)
     
+    # This will test search the centre schedule
+    def test_6_Centre_Schedule_Search(self):
+        try:
+            Centre("ba").search(constants.CHOICE_2)
+        except Exception as ex:
+            self.fail(ex)
+
     # This will search a sewadar
-    def test_6_preacher_search_sewadar_details(self):
+    def test_7_Preacher_Profile_Search(self):
         try:
             Preacher("GUL").query_search()
         except Exception as ex:
             self.fail(ex)
 
     # This will test export the preachers
-    def test_7_preacher_export_preacher_details(self):
+    def test_8_Preacher_Profile_View_Export(self):
         try:
             Preacher().export(constants.CHOICE_1)
         except Exception as ex:
             self.fail(ex)   
     
     # This will test search the preacher language
-    def test_8_Preacher_Language(self):
+    def test_9_Preacher_Language_Search(self):
         try:
             Preacher("GUL").search(constants.CHOICE_2)
         except Exception as ex:

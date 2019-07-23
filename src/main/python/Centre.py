@@ -20,12 +20,13 @@ class Centre(Tab):
     
     def query_search(self):
         self.search_query(self._tab, self._group, self._list_no, constants.CHOICE_1, self.search_input)    
+        # Add assert statements using xpath
     
     def insert(self):
         super(Centre, self).insert(constants.CHOICE_1)
         self.send_inputs(self.search_input, XPATH.CENTRE_LOOKUP_FIELD, clear = "true")
         self.click_select_button(self._tab)
-        self.tab(5).send_inputs("Remarks: Automation Testing")
+        self.tab(5).send_inputs("Remarks: Automation Testing", clear = "true")
         self.tab().send_inputs("Land", dropdown = "true")
         self.tab().send_inputs("Leased", dropdown = "true")
         self.tab().send_inputs(Keys.DOWN)
@@ -35,7 +36,7 @@ class Centre(Tab):
     def search(self, choice_no):
         super(Centre, self).search(choice_no)
         self.send_inputs("Week 4", XPATH.SCREENFIELD_INPUT)
-        self.click_element((XPATH.SCREENFIELD_TABLE_HREF.replace(constants.DUMMY_ROW_NO, "1").replace(constants.DUMMY_COLUMN_NO, "6")))       
+        self.click_element(XPATH.SCREEN_LINK_ROW1_COL6)       
         print ("\tTEST for BANGALORE CENTRE , WEEK 4 Schedule\n")       
         self._assert.test_element_value_xpath(XPATH.CENTRE_LOOKUP_FIELD, "Bangalore")
         self._assert.test_dropdown_value_xpath(XPATH.WEEK_LOOKUP_FIELD, "Week 4")
@@ -44,3 +45,7 @@ class Centre(Tab):
         self._assert.test_element_value_xpath(XPATH.TIME,"09:30:00.000")
         self._assert.test_dropdown_value_xpath(XPATH.STATUS, "Active")
         self.click_element(XPATH.CLOSE_BUTTON)
+
+    def update(self):
+        pass
+        # Update the centre details using reverse tab, also test using xpath asserts
