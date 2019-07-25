@@ -48,10 +48,13 @@ class BrowserBase(object):
     def is_element_active(self, xpath):
         return self.get_element(xpath) == self.get_element()
     
-    def tab(self, number_of_times = 1):
+    def tab(self, number_of_times = 1, reverse = "false"):
         i = 0
         while i < number_of_times:
-            self.get_element().send_keys(Keys.TAB)
+            if reverse == "false":
+                self.get_element().send_keys(Keys.TAB)
+            else:
+                self.get_element().send_keys(Keys.LEFT_SHIFT + Keys.TAB)
             i = i + 1    # update counter   
         return self
         
