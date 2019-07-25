@@ -18,7 +18,7 @@ class Preacher(Tab):
         self._list_no = "3"
 
     def query_search(self):
-        self.search_query(constants.LOOKUP_SEWADAR, self._group, self._list_no, constants.CHOICE_1, self.search_input)
+        self.search_query(constants.LOOKUP_SEWADAR, self._group, self._list_no, constants.CHOICE_1)
 
     def insert(self):
         pass

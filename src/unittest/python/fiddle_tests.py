@@ -28,14 +28,14 @@ class FiddleTest(TestBase):
     # This will search a particular centre details and check the details are inserted using x path
     def test_3_Centre_Search(self):
         try:
-            Centre("Gawla").query_search()
+            Centre("Bangalore").query_search()
         except Exception as ex:
             self.fail(ex)     
 
     # This will update the centre details using shift reverse tab(shift + tab) and test the details are updated using x path
     def test_4_Centre_Update(self):
         try:
-            # Centre("Gawla").update() 
+            Centre("Gawla").update() 
             pass
         except Exception as ex:
             self.fail(ex)     
